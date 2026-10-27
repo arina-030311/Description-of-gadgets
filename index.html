@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gadgets Charms – Homework</title>
+<style>
+:root{--ink:#1b1226;--night:#241a3a;--gold:#d9b24c;--gold2:#f0d27a;--parch:#f4e8c8;--text:#2b1d0e;--red:#8c1d1d;--green:#2e6b3a;--bad:#a3201f}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Palatino Linotype",Palatino,Georgia,serif;color:var(--text);background:radial-gradient(circle at 20% 10%,#3b2a5c 0,transparent 40%),radial-gradient(circle at 85% 90%,#4a1d2a 0,transparent 40%),var(--ink);background-attachment:fixed}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:760px;margin:0 auto;padding:14px 16px 6px;color:var(--gold2)}
+.brand{font-size:1.15rem;font-weight:bold;letter-spacing:.5px}
+.pts{font-size:.95rem;background:#0004;border:1px solid var(--gold);border-radius:20px;padding:4px 12px}
+.steps{display:flex;gap:6px;max-width:760px;margin:0 auto;padding:0 16px 8px}
+.steps i{flex:1;height:6px;border-radius:3px;background:#ffffff26}
+.steps i.d{background:var(--gold)}.steps i.c{background:var(--gold2);box-shadow:0 0 8px var(--gold)}
+main{max-width:760px;margin:0 auto;padding:6px 16px 40px}
+.card{background:var(--parch);border:3px double var(--gold);border-radius:10px;padding:20px 18px;box-shadow:0 10px 30px #0008}
+.tag{font-size:.9rem;color:var(--red);font-weight:bold}
+h1{margin:.2em 0 .3em;font-size:2rem;line-height:1.15;color:var(--red)}
+h2{margin:.25em 0 .4em;font-size:1.35rem;line-height:1.25}
+p{line-height:1.5}.sub{margin:.2em 0 .8em}
+.rule{background:#fff8;border-left:4px solid var(--red);padding:8px 12px;margin:10px 0 14px;font-size:.98rem;line-height:1.6}
+.cnt{float:right;font-size:.9rem;color:#6b5a3c}
+.q{font-size:1.4rem;line-height:1.5;margin:12px 0}
+.gap{display:inline-block;min-width:70px;border-bottom:3px solid var(--red);text-align:center}
+.sg{display:inline-block;width:1.5em;height:1.5em;line-height:1.5em;text-align:center;border-radius:50%;color:#fff;font-size:.9em;margin-left:6px}
+.sg.yes{background:var(--green)}.sg.no{background:var(--bad)}
+.opts,.row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.opt,.mb,.tile{background:#fff;border:2px solid #8a6d2c;border-radius:8px;padding:10px 16px;font-size:1.1rem;color:var(--text);transition:transform .1s,background .15s}
+.opt:hover:not(:disabled),.mb:hover:not(:disabled),.tile:hover{background:#fff3cf;transform:translateY(-1px)}
+.opt.x{background:#f5c9c6;border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.opt.g,.mb.g{background:#cfe8d0;border-color:var(--green);color:#1b4a25}
+.mb.s{background:var(--gold2);border-color:var(--red)}
+.opt:disabled,.mb:disabled{cursor:default}
+.btn{background:var(--red);color:#fff;border:2px solid var(--gold);border-radius:8px;padding:11px 22px;font-size:1.05rem;font-weight:bold}
+.btn:hover{background:#a52424}.btn.ghost{background:transparent;color:var(--red);border-color:var(--red)}
+.btn:disabled{opacity:.5;cursor:default}
+.fb{margin:10px 0;padding:10px 12px;border-radius:8px;line-height:1.45}
+.fb.ok{background:#d8efd9;color:#1b4a25}.fb.no{background:#f7d6d3;color:#7a1816}
+.m{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}
+.m>div{display:flex;flex-direction:column;gap:8px}.m .mb{text-align:left;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:#fff;border:1px solid #8a6d2c;border-radius:16px;padding:3px 11px;font-size:.95rem}
+.chip.f{background:var(--night);color:var(--gold2);border-color:var(--night)}
+.facts{background:var(--night);color:var(--gold2);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:1.1rem}
+.facts b{font-size:2rem;margin-right:8px;vertical-align:middle}
+.tray{min-height:56px;border:2px dashed #8a6d2c;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;background:#fff6}
+.bank{border-style:solid;border-color:#c9b27a}
+.ph{color:#8a7a5a;font-style:italic;align-self:center}
+input[type=text],textarea{width:100%;font:inherit;font-size:1.15rem;padding:10px;border:2px solid #8a6d2c;border-radius:8px;background:#fff;color:var(--text)}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+.big{font-size:2.6rem;color:var(--red);margin:.1em 0}
+.rev{margin:6px 0;padding-left:18px;line-height:1.5}
+.small{background:none;border:none;color:var(--gold2);text-decoration:underline;font-size:.85rem;opacity:.8}
+footer{text-align:center;padding-bottom:20px}
+@media(max-width:520px){h1{font-size:1.6rem}.q{font-size:1.2rem}.m{grid-template-columns:1fr 1fr}.m .mb{font-size:.95rem;padding:9px 8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div id="app"></div>
+<script>
+const KEY='gadgets_hw_v1',$=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const G={computer:'🖥️',laptop:'💻',tablet:'📲',headphones:'🎧',speaker:'🔊',phone:'📱',powerbank:'🔋',camera:'📷'};
+const ADJ=['old','new','easy to use','cheap','expensive','cool','compact','large'];
+const CLUE={old:'🕸️ 2005 phone','new':'🎁 just bought','easy to use':'✅ no problem',cheap:'🏷️ % sale',expensive:'💰 $$$',cool:'👍 I like it',compact:'📏 small',large:'📏 big'};
+const isPl=g=>g==='headphones';
+const be=(g,n)=>n?(isPl(g)?'aren’t':'isn’t'):(isPl(g)?'are':'is');
+const sent=(g,a,n)=>`The ${g} ${be(g,n)} ${a}.`;
+const sg=n=>`<span class="sg ${n?'no':'yes'}">${n?'✘':'✔'}</span>`;
+const RULE='<b>Запомни:</b><br>✔ The laptop <b>is</b> cool. &nbsp; ✘ The laptop <b>isn’t</b> cool.<br>✔ The headphones <b>are</b> cool. &nbsp; ✘ The headphones <b>aren’t</b> cool.';
+const bh=(g,n)=>`“${g}” = ${isPl(g)?'несколько предметов → <b>are / aren’t</b>':'один предмет → <b>is / isn’t</b>'}. ${n?'✘ = отрицание: isn’t / aren’t.':'✔ = утверждение: is / are.'}`;
+const chipsFor=i=>`<p class="sub">Опиши этот гаджет (✔ → is / are, ✘ → isn’t / aren’t):</p><div class="facts"><b>${G[i[0]]}</b>${i[0]} · ${i[1]} · ${sg(i[2])}</div>`;
+const TK={
+2:{name:'Choose the Charm',sub:'Выбери правильную форму глагола to be. ✔ — утверждение, ✘ — отрицание (not).',max:2,type:'c',
+ items:[['tablet','easy to use',0],['headphones','cool',0],['powerbank','expensive',1],['headphones','old',1],['speaker','large',1],['camera','new',0]],
+ ans:i=>be(i[0],i[2]),rep:i=>`The ${i[0]} ___ ${i[1]} ${i[2]?'✘':'✔'}`,hint:i=>bh(i[0],i[2])},
+3:{name:'Build the Spell',sub:'Собери предложение: нажимай на слова в правильном порядке. Смотри на знак ✔ или ✘.',max:3,type:'b',
+ items:[['laptop','compact',0],['phone','expensive',1],['headphones','cool',0],['tablet','old',1],['speaker','easy to use',0],['powerbank','large',1]],
+ ans:i=>sent(...i),rep:i=>sent(...i),hint:i=>`Начни с “The”. Потом гаджет, потом to be, в конце прилагательное. ${bh(i[0],i[2])}`},
+4:{name:'The Sorting Hat',sub:'Посмотри на карточку гаджета. Предложение верное (True) или неверное (False)?',max:2,type:'t',
+ items:[{g:'phone',f:['old','cheap'],s:'The phone is old.',v:1},{g:'laptop',f:['new','expensive','compact'],s:'The laptop isn’t expensive.',v:0},{g:'headphones',f:['cool','cheap'],s:'The headphones aren’t cool.',v:0},{g:'computer',f:['old','large'],s:'The computer isn’t new.',v:1},{g:'camera',f:['expensive','cool'],s:'The camera is cheap.',v:0},{g:'speaker',f:['compact','easy to use'],s:'The speaker isn’t large.',v:1}],
+ ans:i=>i.v?'True':'False',rep:i=>i.s,hint:i=>`Посмотри на карточку ещё раз: ${i.f.join(', ')}. Помни: isn’t = is not. Если слова нет на карточке, подумай об антониме: old ↔ new, cheap ↔ expensive, compact ↔ large.`},
+5:{name:'Write the Spell',sub:'Напиши предложение целиком по формуле: The + гаджет + is / isn’t / are / aren’t + прилагательное.',max:3,type:'w',
+ items:[['camera','cool',0],['phone','old',1],['headphones','expensive',1],['tablet','compact',0],['computer','easy to use',1]],
+ ans:i=>sent(...i),rep:i=>`${i[0]} + ${i[1]} ${i[2]?'✘':'✔'}`,hint:(i,n)=>n===0?'Формула: The + гаджет + is / isn’t / are / aren’t + прилагательное.':bh(i[0],i[2])}
+};
+const MAX=8+Object.values(TK).reduce((s,t)=>s+t.items.length,0);
+function fresh(){return{scr:0,p:[0,0,0,0,0,0],log:{},m1:{},d1:[],o1:null,open:''}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.p&&x.log)return x}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load(),cur=null,sel1=null;
+function score(){let p=ADJ.filter(w=>S.d1.includes(w)&&!S.m1[w]).length;for(const k in S.log)if(S.log[k].first)p++;return p}
+function updPts(){const e=$('.pts');if(e)e.textContent='🏆 '+score()+' очков'}
+function go(n){S.scr=n;save();cur=null;sel1=null;render();scrollTo(0,0)}
+function restart(){if(confirm('Начать заново? Все ответы будут удалены.')){S=fresh();save();cur=null;render()}}
+function head(){return `<header><div class="brand">⚡ Gadgets Charms</div><div class="pts">🏆 ${score()} очков</div></header><div class="steps">${[1,2,3,4,5,6].map(i=>`<i class="${S.scr>i?'d':S.scr===i?'c':''}"></i>`).join('')}</div>`}
+function render(){
+ let h;
+ if(S.scr===0)h=intro();else if(S.scr===1)h=t1();else if(S.scr<=5)h=item(S.scr);else if(S.scr===6)h=t6();else h=result();
+ $('#app').innerHTML=(S.scr>0&&S.scr<7?head():'')+'<main>'+h+(S.scr>0&&S.scr<7?'<footer><button class="small" onclick="restart()">↺ Начать заново</button></footer>':'')+'</main>';
+ if(S.scr===1)draw1();
+ if(S.scr>=2&&S.scr<=5&&TK[S.scr].type==='b')drawB();
+}
+function intro(){return `<section class="card"><div class="tag">Домашнее задание · Гаджеты и их описание</div><h1>Добро пожаловать на урок Gadgets Charms</h1>
+<p>Сегодня ты учишься описывать гаджеты по-английски. Мы используем только глагол <b>to be</b> (быть): is / are. Для отрицания добавляем not: isn’t / aren’t.</p><p><b>headphones</b> (наушники) — это «несколько», поэтому are / aren’t. Остальные гаджеты — is / isn’t.</p>
+<div class="rule">✔ The laptop <b>is</b> compact and cool.<br>✘ The laptop <b>isn’t</b> cheap.<br>✔ The headphones <b>are</b> new.<br>✘ The headphones <b>aren’t</b> large.</div>
+<p>Гаджеты:</p><div class="chips">${Object.entries(G).map(([k,v])=>`<span class="chip f">${v} ${k}</span>`).join('')}</div>
+<p>Слова для описания:</p><div class="chips">${ADJ.map(a=>`<span class="chip">${a}</span>`).join('')}</div>
+<p>В домашнем задании 6 заданий. За каждый правильный ответ с первой попытки ты получаешь очко. В конце нажми «Скопировать учителю» и отправь результаты учителю.</p>
+<button class="btn" onclick="go(1)">Начать →</button></section>`}
+function t1(){if(!S.o1)S.o1=shuffle(ADJ);return `<section class="card"><div class="tag">Задание 1 · Potion Pairs</div><h2>Соедини слово с подсказкой</h2><p class="sub">Нажми на слово слева, потом на подходящую подсказку справа.</p><div class="m"><div id="L"></div><div id="R"></div></div><div id="fb"></div><div id="act"></div></section>`}
+function draw1(){
+ const d=w=>S.d1.includes(w);
+ $('#L').innerHTML=ADJ.map(w=>`<button class="mb ${d(w)?'g':''} ${sel1===w?'s':''}" ${d(w)?'disabled':''} data-w="${w}" onclick="lp(this)">${w}</button>`).join('');
+ $('#R').innerHTML=S.o1.map(w=>`<button class="mb ${d(w)?'g':''}" ${d(w)?'disabled':''} data-w="${w}" onclick="rp(this)">${CLUE[w]}</button>`).join('');
+ if(S.d1.length===8)$('#act').innerHTML='<button class="btn" onclick="go(2)">Дальше →</button>';
+}
+function lp(b){sel1=b.dataset.w;draw1()}
+function rp(b){
+ if(!sel1){$('#fb').innerHTML='<div class="fb no">Сначала нажми на слово слева.</div>';return}
+ const w=b.dataset.w;
+ if(w===sel1){S.d1.push(w);$('#fb').innerHTML=`<div class="fb ok">✓ ${w} = ${CLUE[w]}</div>`}
+ else{S.m1[sel1]=(S.m1[sel1]||0)+1;$('#fb').innerHTML='<div class="fb no">✗ Не подходит. Выбери слово ещё раз и попробуй снова.</div>'}
+ sel1=null;save();draw1();updPts();
+}
+function item(t){
+ const T=TK[t],k=S.p[t],it=T.items[k];
+ if(!cur||cur.t!==t||cur.k!==k){cur={t,k,tries:[],done:false,placed:[],tiles:null};
+  if(T.type==='b'){const dis=be(it[0],it[2]);const wrong=isPl(it[0])?(it[2]?'isn’t':'is'):(it[2]?'aren’t':'are');cur.tiles=shuffle([...sent(...it).split(' '),wrong]).map(w=>({w}))}}
+ return `<section class="card"><div class="tag">Задание ${t} · ${T.name}</div><span class="cnt">${k+1} / ${T.items.length}</span><h2>${T.sub}</h2><div class="rule">${RULE}</div>${V[T.type](it)}<div id="fb"></div><div id="act"></div></section>`;
+}
+const V={
+ c:i=>`<p class="q">${G[i[0]]} The ${i[0]} <span class="gap">&nbsp;</span> ${i[1]}. ${sg(i[2])}</p><div class="opts">${['is','are','isn’t','aren’t'].map(o=>`<button class="opt" data-v="${o}" onclick="pickC(this)">${o}</button>`).join('')}</div>`,
+ t:i=>`<div class="facts"><b>${G[i.g]}</b>${i.g}: ${i.f.join(' · ')}</div><p class="q">“${i.s}”</p><div class="opts"><button class="opt" data-v="True" onclick="pickT(this)">True</button><button class="opt" data-v="False" onclick="pickT(this)">False</button></div>`,
+ b:i=>`${chipsFor(i)}<div id="ans" class="tray"></div><div id="bank" class="tray bank"></div><div class="row"><button class="btn" onclick="chkB()">Проверить</button><button class="btn ghost" onclick="clrB()">Очистить</button></div>`,
+ w:i=>`${chipsFor(i)}<input type="text" id="tin" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Напиши предложение" onkeydown="if(event.key==='Enter')chkW()"><div class="row"><button class="btn" id="cb" onclick="chkW()">Проверить</button></div>`
+};
+function it_(){return TK[cur.t].items[cur.k]}
+function resolve(ok,shown,ans){
+ const T=TK[cur.t],n=cur.tries.length;cur.tries.push(shown);
+ const fb=$('#fb');
+ if(ok){fin(true,false);fb.innerHTML=`<div class="fb ok">✓ Верно! ${cur.tries.length>1?'Хорошо, что исправила ошибку.':'С первой попытки!'}</div>`}
+ else if(cur.tries.length>=T.max){fin(false,true);fb.innerHTML=`<div class="fb no">✗ В этот раз не получилось. Правильный ответ: <b>${esc(ans)}</b></div>`}
+ else fb.innerHTML=`<div class="fb no">✗ ${T.hint(it_(),n)} Попробуй ещё раз.</div>`;
+ return ok||cur.done;
+}
+function fin(ok,rev){
+ cur.done=true;S.log[cur.t+'.'+cur.k]={tries:cur.tries,first:ok&&cur.tries.length===1,rev:rev};save();
+ const last=cur.k>=TK[cur.t].items.length-1;
+ $('#act').innerHTML=`<button class="btn" onclick="nxt()">${last?'Закончить задание →':'Дальше →'}</button>`;
+ document.querySelectorAll('.opt,.tile,#tin,#cb').forEach(e=>e.disabled=true);
+ updPts();
+}
+function nxt(){const t=cur.t;S.p[t]++;if(S.p[t]>=TK[t].items.length)go(t+1);else{save();cur=null;render()}}
+function showAns(a){document.querySelectorAll('.opt').forEach(b=>{if(b.dataset.v===a)b.classList.add('g')})}
+function pickC(b){
+ if(cur.done)return;const T=TK[cur.t],a=T.ans(it_()),v=b.dataset.v,ok=v===a;
+ if(!ok){b.classList.add('x');b.disabled=true}
+ if(resolve(ok,v,a))showAns(a);
+}
+function
