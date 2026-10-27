@@ -159,4 +159,63 @@ function pickC(b){
  if(!ok){b.classList.add('x');b.disabled=true}
  if(resolve(ok,v,a))showAns(a);
 }
-function
+function pickT(b){
+ if(cur.done)return;const T=TK[cur.t],a=T.ans(it_()),v=b.dataset.v,ok=v===a;
+ if(!ok){b.classList.add('x');b.disabled=true}
+ if(resolve(ok,v,a))showAns(a);
+}
+function drawB(){
+ $('#ans').innerHTML=cur.placed.map(i=>`<button class="tile" onclick="tb(${i},0)">${esc(cur.tiles[i].w)}</button>`).join('')||'<span class="ph">Нажимай на слова по порядку</span>';
+ $('#bank').innerHTML=cur.tiles.map((t,i)=>cur.placed.includes(i)?'':`<button class="tile" onclick="tb(${i},1)">${esc(t.w)}</button>`).join('');
+ if(cur.done)document.querySelectorAll('.tile').forEach(e=>e.disabled=true);
+}
+function tb(i,add){if(cur.done)return;if(add)cur.placed.push(i);else cur.placed=cur.placed.filter(x=>x!==i);drawB()}
+function clrB(){if(!cur.done){cur.placed=[];drawB()}}
+function chkB(){
+ if(cur.done||!cur.placed.length)return;
+ const a=TK[cur.t].ans(it_()),v=cur.placed.map(i=>cur.tiles[i].w).join(' ');
+ const d=resolve(v===a,v,a);if(!d){cur.placed=[]}drawB();
+}
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/[.!\s]+$/,'').replace(/'s not\b/g," isn't").replace(/\bis not\b/g,"isn't").replace(/\bare not\b/g,"aren't").replace(/\s+/g,' ').trim().replace(/^the /,'');
+function chkW(){
+ if(cur.done)return;const v=$('#tin').value.trim();if(!v)return;
+ const a=TK[cur.t].ans(it_());
+ if(resolve(norm(v)===norm(a),v,a)===false)$('#tin').select();
+}
+function t6(){return `<section class="card"><div class="tag">Задание 6 · Your Own Gadget</div><h2>Опиши гаджет тремя предложениями</h2><div class="rule">Выбери один гаджет. Напиши 2 предложения с <b>is / are</b> и 1 предложение с <b>isn’t / aren’t</b>. Используй слова ниже.<br>Пример: The laptop is compact. The laptop is cool. The laptop isn’t cheap.</div>
+<div class="chips">${Object.entries(G).map(([k,v])=>`<span class="chip f">${v} ${k}</span>`).join('')}</div><div class="chips">${ADJ.map(a=>`<span class="chip">${a}</span>`).join('')}</div>
+<textarea id="op" placeholder="The ... is ...">${esc(S.open)}</textarea><div id="fb"></div><div class="row"><button class="btn" onclick="fin6()">Закончить →</button></div><p class="sub">Этот ответ прочитает учитель.</p></section>`}
+function fin6(){
+ const v=$('#op').value;S.open=v;save();
+ if(v.split(/[.!\n]+/).filter(x=>x.trim().length>3).length<3){$('#fb').innerHTML='<div class="fb no">Напиши 3 предложения, потом нажми «Закончить».</div>';return}
+ go(7);
+}
+document.addEventListener('input',e=>{if(e.target.id==='op'){S.open=e.target.value;save()}});
+function report(){
+ let r=`Gadgets and Their Descriptions — Homework\nРезультат: ${score()}/${MAX} (баллы за ответы с первой попытки)\n`;
+ r+='\nЗадание 1 · Potion Pairs (соединить слова)\n'+(Object.keys(S.m1).length?'Ошибки: '+Object.entries(S.m1).map(([w,n])=>`${w} (${n})`).join(', '):'Все пары без ошибок ✓');
+ const rev=[];
+ for(const t of [2,3,4,5]){const T=TK[t];r+=`\n\nЗадание ${t} · ${T.name}`;
+  T.items.forEach((it,k)=>{const l=S.log[t+'.'+k];if(!l)return;
+   r+=`\n${k+1}. ${T.rep(it)}\n   `+l.tries.map((a,i)=>`${a} ${(!l.rev&&i===l.tries.length-1)?'✓':'✗'}`).join(' → ')+(l.rev?' (ответ показан)':'')+` | попыток: ${l.tries.length}`;
+   if(!l.first)rev.push(`${T.rep(it)} → ${T.ans(it)}`)})}
+ r+=`\n\nЗадание 6 · Own gadget (ответ ученика)\n${S.open.trim()}`;
+ const mm=Object.keys(S.m1);
+ r+='\n\nЧто стоит повторить:\n'+((rev.length||mm.length)?[...(mm.length?['Слова: '+mm.join(', ')]:[]),...rev].map(x=>'• '+x).join('\n'):'Всё получилось с первой попытки ✓');
+ return r;
+}
+function result(){
+ const p=score(),rep=report();
+ return `<section class="card"><div class="tag">Домашнее задание выполнено</div><h1>Молодец!</h1><div class="big">${p} / ${MAX}</div><p>Очки за ответы с первой попытки. Нажми кнопку «Скопировать учителю» и отправь результаты учителю.</p>
+<div class="row"><button class="btn" onclick="copyR()">Скопировать учителю</button><button class="btn ghost" onclick="restart()">↺ Начать заново</button></div><div id="cm" aria-live="polite"></div>
+<textarea id="rep" readonly style="min-height:240px;font-size:.9rem">${esc(rep)}</textarea></section>`;
+}
+async function copyR(){
+ const t=report();let ok=false;
+ try{await navigator.clipboard.writeText(t);ok=true}catch(e){
+  try{const ta=$('#rep');ta.removeAttribute('readonly');ta.select();ok=document.execCommand('copy');ta.setAttribute('readonly','')}catch(e2){}}
+ $('#cm').innerHTML=ok?'<div class="fb ok">✓ Результаты скопированы. Теперь отправь их учителю.</div>':'<div class="fb no">Не удалось скопировать автоматически. Выдели текст ниже и скопируй его вручную.</div>';
+ if(!ok){$('#rep').focus();$('#rep').select()}
+}
+render();
+</script></body></html>
